@@ -13,11 +13,14 @@ services:
         databases:
           default:
             connector: postgres
-            host: postgres
-            user: prisma
-            password: prisma
+            host: ${DB_HOST}
+            database: ${DB_DATABASE}
+            schema: public
+            user: ${DB_USER}
+            password: ${DB_PASS}
+            ssl: true
             rawAccess: true
-            port: 5432
+            port: '5432'
             migrations: true
   postgres:
     image: postgres
