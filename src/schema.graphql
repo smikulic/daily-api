@@ -8,11 +8,26 @@ type User {
   password: String!
 }
 
+type Project {
+  id: ID!
+  name: String!
+  rate: String
+  client: String
+  themeColor: String
+  userId: String!
+}
+
 type Mutation {
   signup(email: String!, password: String!): AuthPayload
+  login(email: String!, password: String!): AuthPayload
 }
 
 type AuthPayload {
   token: String
   user: User
+  error: ErrorPayload
+}
+
+type ErrorPayload {
+  message: String
 }

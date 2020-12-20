@@ -3,3 +3,13 @@ type User {
   email: String! @unique
   password: String!
 }
+
+type Project {
+  id: ID! @id
+  user: User @relation(fields: [userId], references: [id])
+  userId: ID
+  name: String!
+  rate: String
+  client: String
+  themeColor: String
+}

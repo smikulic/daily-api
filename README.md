@@ -13,6 +13,24 @@ mutation {
 }
 ```
 
+### Login
+```
+mutation {
+  login(
+    email: "admin@test.com"
+    password: "admin"
+  ) {
+    token
+    user {
+      id
+    }
+    error {
+      message
+    }
+  }
+}
+```
+
 ### Get Users
 ```
 query {

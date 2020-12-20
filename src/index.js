@@ -8,6 +8,19 @@ const resolvers = {
   Mutation,
 };
 
+// const authenticate = async (resolve, root, args, context, info) => {
+//   let token;
+//   console.log('auth!!')
+//   try {
+//     token = jwt.verify(context.request.get("Authorization"), "secret");
+//   } catch (e) {
+//     console.log('AH!')
+//     // return new AuthenticationError("Not authorised");
+//   }
+//   const result = await resolve(root, args, context, info);
+//   return result;
+// };
+
 const server = new GraphQLServer({
   typeDefs: "./src/schema.graphql",
   resolvers,
