@@ -1,0 +1,14 @@
+{
+  "name": "daily-api",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Sinisa Mikulic",
+  "license": "MIT",
+  "scripts": {
+    "start": "node ./src/index.js"
+  },
+  "devDependencies": {
+    "graphql-yoga": "^1.18.3",
+    "prisma-client-lib": "^1.34.10"
+  }
+}
