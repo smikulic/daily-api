@@ -15,11 +15,8 @@ mutation {
 
 ### Login
 ```
-mutation {
-  login(
-    email: "admin@test.com"
-    password: "admin"
-  ) {
+mutation Login($email: String!, $password: String!) {
+  login(email: $email, password: $password) {
     token
     user {
       id
@@ -28,6 +25,11 @@ mutation {
       message
     }
   }
+}
+
+{
+  "email": "admin@example.com",
+  "password": "password"
 }
 ```
 
@@ -46,9 +48,20 @@ query {
 {
   "data": {
     "signup": {
-      "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJja2l3bTA1aWMwMDI4MDk0M3Q2djhpcWFmIiwiaWF0IjoxNjA4NDM3MjQwfQ.ucBYJntYKL0UXlOeArghaKHKu49YdRpfYLcKXCB5MX8",
+      "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJja2o1cTM4bTgwMDFkMDg0M3l1bDNtY2NxIiwiaWF0IjoxNjA4OTg4Mjk4fQ.DGOJMp3iJHn8kWCo1WyEUU4nkG-Phg7_aB4hVmtJ__8",
       "user": {
-        "id": "ckiwm05ic00280943t6v8iqaf"
+        "id": "ckj5q38m8001d0843yul3mccq"
+      }
+    }
+  }
+}
+
+{
+  "data": {
+    "signup": {
+      "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJja2o1cDRzMzgwMDBzMDg0M2ttMnBtYnBlIiwiaWF0IjoxNjA4OTg2NjkwfQ.19C-bskZxNjbY6PikKL-xgckScb605yVoGU6CZsYhzE",
+      "user": {
+        "id": "ckj5p4s38000s0843km2pmbpe"
       }
     }
   }
