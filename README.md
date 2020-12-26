@@ -1,3 +1,7 @@
+## Change DB
+go into prisma directory
+`prisma deploy`
+
 ### Create new user
 ```
 mutation {
@@ -65,5 +69,12 @@ query {
       }
     }
   }
+}
+```
+
+HTTP Headers in GraphQL Playground
+```
+{
+  "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJja2o1cTM4bTgwMDFkMDg0M3l1bDNtY2NxIiwiaWF0IjoxNjA5MDEyNjAwfQ.UEMO0KFhHJhHtVKgpdhzFNqjJLS7uFKWdy8fQB2mUqY"
 }
 ```

@@ -1,5 +1,6 @@
 type Query {
   users: [User!]!
+  projects: [Project!]!
 }
 
 type User {
@@ -20,6 +21,7 @@ type Project {
 type Mutation {
   signup(email: String!, password: String!): AuthPayload
   login(email: String!, password: String!): AuthPayload
+  projectCreate(name: String!, rate: String, client: String, themeColor: String): Project
 }
 
 type AuthPayload {
