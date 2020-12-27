@@ -78,3 +78,35 @@ HTTP Headers in GraphQL Playground
   "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJja2o1cTM4bTgwMDFkMDg0M3l1bDNtY2NxIiwiaWF0IjoxNjA5MDEyNjAwfQ.UEMO0KFhHJhHtVKgpdhzFNqjJLS7uFKWdy8fQB2mUqY"
 }
 ```
+
+### Create Project
+```
+mutation {
+  projectCreate(
+    name: "Company project"
+    rate: "70"
+    currency: "EUR"
+  ) {
+    name
+    userId
+  }
+}
+```
+
+### Create Event
+```
+mutation {
+  eventCreate(
+    description: "Amount and balance formatter fixes"
+    hours: 7.5
+    date: "Fri Nov 03 2020 12:00:00 GMT+0100 (Central European Standard Time)"
+		projectId: "ckj65s4cj00240843qjhpmi1t"
+  ) {
+    description
+    hours
+    date
+    userId
+    projectId
+  }
+}
+```

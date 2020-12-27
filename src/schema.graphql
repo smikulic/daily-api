@@ -1,5 +1,6 @@
 type Query {
   users: [User!]!
+  events: [Event!]!
   projects: [Project!]!
 }
 
@@ -11,17 +12,39 @@ type User {
 
 type Project {
   id: ID!
+  userId: String!
   name: String!
   rate: String
-  client: String
+  currency: String!
   themeColor: String
-  userId: String!
+  client: String
+}
+
+type Event {
+  id: ID!
+  userId: ID!
+  projectId: ID
+  description: String!
+  hours: Float!
+  date: String!
 }
 
 type Mutation {
   signup(email: String!, password: String!): AuthPayload
   login(email: String!, password: String!): AuthPayload
-  projectCreate(name: String!, rate: String, client: String, themeColor: String): Project
+  projectCreate(
+    name: String!
+    rate: String
+    currency: String!
+    themeColor: String
+    client: String
+  ): Project
+  eventCreate(
+    projectId: ID
+    description: String!
+    hours: Float!
+    date: String!
+  ): Event
 }
 
 type AuthPayload {

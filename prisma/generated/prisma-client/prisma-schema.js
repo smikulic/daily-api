@@ -3,7 +3,11 @@ module.exports = {
   // Please don't change this file manually but run `prisma generate` to update it.
   // For more information, please read the docs: https://www.prisma.io/docs/prisma-client/
 
-/* GraphQL */ `type AggregateProject {
+/* GraphQL */ `type AggregateEvent {
+  count: Int!
+}
+
+type AggregateProject {
   count: Int!
 }
 
@@ -15,9 +19,198 @@ type BatchPayload {
   count: Long!
 }
 
+type Event {
+  id: ID!
+  user: User
+  userId: ID!
+  project: Project
+  projectId: ID
+  description: String!
+  hours: Float!
+  date: String!
+}
+
+type EventConnection {
+  pageInfo: PageInfo!
+  edges: [EventEdge]!
+  aggregate: AggregateEvent!
+}
+
+input EventCreateInput {
+  id: ID
+  user: UserCreateOneInput
+  userId: ID!
+  project: ProjectCreateOneInput
+  projectId: ID
+  description: String!
+  hours: Float!
+  date: String!
+}
+
+type EventEdge {
+  node: Event!
+  cursor: String!
+}
+
+enum EventOrderByInput {
+  id_ASC
+  id_DESC
+  userId_ASC
+  userId_DESC
+  projectId_ASC
+  projectId_DESC
+  description_ASC
+  description_DESC
+  hours_ASC
+  hours_DESC
+  date_ASC
+  date_DESC
+}
+
+type EventPreviousValues {
+  id: ID!
+  userId: ID!
+  projectId: ID
+  description: String!
+  hours: Float!
+  date: String!
+}
+
+type EventSubscriptionPayload {
+  mutation: MutationType!
+  node: Event
+  updatedFields: [String!]
+  previousValues: EventPreviousValues
+}
+
+input EventSubscriptionWhereInput {
+  mutation_in: [MutationType!]
+  updatedFields_contains: String
+  updatedFields_contains_every: [String!]
+  updatedFields_contains_some: [String!]
+  node: EventWhereInput
+  AND: [EventSubscriptionWhereInput!]
+  OR: [EventSubscriptionWhereInput!]
+  NOT: [EventSubscriptionWhereInput!]
+}
+
+input EventUpdateInput {
+  user: UserUpdateOneInput
+  userId: ID
+  project: ProjectUpdateOneInput
+  projectId: ID
+  description: String
+  hours: Float
+  date: String
+}
+
+input EventUpdateManyMutationInput {
+  userId: ID
+  projectId: ID
+  description: String
+  hours: Float
+  date: String
+}
+
+input EventWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  user: UserWhereInput
+  userId: ID
+  userId_not: ID
+  userId_in: [ID!]
+  userId_not_in: [ID!]
+  userId_lt: ID
+  userId_lte: ID
+  userId_gt: ID
+  userId_gte: ID
+  userId_contains: ID
+  userId_not_contains: ID
+  userId_starts_with: ID
+  userId_not_starts_with: ID
+  userId_ends_with: ID
+  userId_not_ends_with: ID
+  project: ProjectWhereInput
+  projectId: ID
+  projectId_not: ID
+  projectId_in: [ID!]
+  projectId_not_in: [ID!]
+  projectId_lt: ID
+  projectId_lte: ID
+  projectId_gt: ID
+  projectId_gte: ID
+  projectId_contains: ID
+  projectId_not_contains: ID
+  projectId_starts_with: ID
+  projectId_not_starts_with: ID
+  projectId_ends_with: ID
+  projectId_not_ends_with: ID
+  description: String
+  description_not: String
+  description_in: [String!]
+  description_not_in: [String!]
+  description_lt: String
+  description_lte: String
+  description_gt: String
+  description_gte: String
+  description_contains: String
+  description_not_contains: String
+  description_starts_with: String
+  description_not_starts_with: String
+  description_ends_with: String
+  description_not_ends_with: String
+  hours: Float
+  hours_not: Float
+  hours_in: [Float!]
+  hours_not_in: [Float!]
+  hours_lt: Float
+  hours_lte: Float
+  hours_gt: Float
+  hours_gte: Float
+  date: String
+  date_not: String
+  date_in: [String!]
+  date_not_in: [String!]
+  date_lt: String
+  date_lte: String
+  date_gt: String
+  date_gte: String
+  date_contains: String
+  date_not_contains: String
+  date_starts_with: String
+  date_not_starts_with: String
+  date_ends_with: String
+  date_not_ends_with: String
+  AND: [EventWhereInput!]
+  OR: [EventWhereInput!]
+  NOT: [EventWhereInput!]
+}
+
+input EventWhereUniqueInput {
+  id: ID
+}
+
 scalar Long
 
 type Mutation {
+  createEvent(data: EventCreateInput!): Event!
+  updateEvent(data: EventUpdateInput!, where: EventWhereUniqueInput!): Event
+  updateManyEvents(data: EventUpdateManyMutationInput!, where: EventWhereInput): BatchPayload!
+  upsertEvent(where: EventWhereUniqueInput!, create: EventCreateInput!, update: EventUpdateInput!): Event!
+  deleteEvent(where: EventWhereUniqueInput!): Event
+  deleteManyEvents(where: EventWhereInput): BatchPayload!
   createProject(data: ProjectCreateInput!): Project!
   updateProject(data: ProjectUpdateInput!, where: ProjectWhereUniqueInput!): Project
   updateManyProjects(data: ProjectUpdateManyMutationInput!, where: ProjectWhereInput): BatchPayload!
@@ -52,7 +245,7 @@ type PageInfo {
 type Project {
   id: ID!
   user: User
-  userId: ID
+  userId: ID!
   name: String!
   rate: String
   client: String
@@ -68,11 +261,16 @@ type ProjectConnection {
 input ProjectCreateInput {
   id: ID
   user: UserCreateOneInput
-  userId: ID
+  userId: ID!
   name: String!
   rate: String
   client: String
   themeColor: String
+}
+
+input ProjectCreateOneInput {
+  create: ProjectCreateInput
+  connect: ProjectWhereUniqueInput
 }
 
 type ProjectEdge {
@@ -97,7 +295,7 @@ enum ProjectOrderByInput {
 
 type ProjectPreviousValues {
   id: ID!
-  userId: ID
+  userId: ID!
   name: String!
   rate: String
   client: String
@@ -122,6 +320,15 @@ input ProjectSubscriptionWhereInput {
   NOT: [ProjectSubscriptionWhereInput!]
 }
 
+input ProjectUpdateDataInput {
+  user: UserUpdateOneInput
+  userId: ID
+  name: String
+  rate: String
+  client: String
+  themeColor: String
+}
+
 input ProjectUpdateInput {
   user: UserUpdateOneInput
   userId: ID
@@ -137,6 +344,20 @@ input ProjectUpdateManyMutationInput {
   rate: String
   client: String
   themeColor: String
+}
+
+input ProjectUpdateOneInput {
+  create: ProjectCreateInput
+  update: ProjectUpdateDataInput
+  upsert: ProjectUpsertNestedInput
+  delete: Boolean
+  disconnect: Boolean
+  connect: ProjectWhereUniqueInput
+}
+
+input ProjectUpsertNestedInput {
+  update: ProjectUpdateDataInput!
+  create: ProjectCreateInput!
 }
 
 input ProjectWhereInput {
@@ -235,6 +456,9 @@ input ProjectWhereUniqueInput {
 }
 
 type Query {
+  event(where: EventWhereUniqueInput!): Event
+  events(where: EventWhereInput, orderBy: EventOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Event]!
+  eventsConnection(where: EventWhereInput, orderBy: EventOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): EventConnection!
   project(where: ProjectWhereUniqueInput!): Project
   projects(where: ProjectWhereInput, orderBy: ProjectOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Project]!
   projectsConnection(where: ProjectWhereInput, orderBy: ProjectOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ProjectConnection!
@@ -245,6 +469,7 @@ type Query {
 }
 
 type Subscription {
+  event(where: EventSubscriptionWhereInput): EventSubscriptionPayload
   project(where: ProjectSubscriptionWhereInput): ProjectSubscriptionPayload
   user(where: UserSubscriptionWhereInput): UserSubscriptionPayload
 }

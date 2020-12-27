@@ -2,7 +2,7 @@ const { getCurrentUser } = require("../getCurrentUser");
 
 async function create(parent, args, context, info) {
   const currentUser = await getCurrentUser(context);
-  const { ...data } = await context.prisma.createProject({
+  const { ...data } = await context.prisma.createEvent({
     ...args,
     userId: currentUser.id,
   });
@@ -11,12 +11,12 @@ async function create(parent, args, context, info) {
 
 async function index(parent, args, context, info) {
   const currentUser = await getCurrentUser(context);
-  const projectsByUser = await context.prisma.projects({
+  const eventsByUser = await context.prisma.events({
     where: {
       userId: currentUser.id,
     },
   });
-  return projectsByUser;
+  return eventsByUser;
 }
 
 module.exports = {

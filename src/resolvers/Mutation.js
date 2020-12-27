@@ -1,6 +1,7 @@
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const project = require("./project");
+const event = require("./event");
 const APP_SECRET = "daily-api"; // TODO: replace
 
 async function signup(parent, args, context, info) {
@@ -53,4 +54,5 @@ module.exports = {
   signup,
   login,
   projectCreate: project.create,
+  eventCreate: event.create,
 };

@@ -7,9 +7,20 @@ type User {
 type Project {
   id: ID! @id
   user: User @relation(fields: [userId], references: [id])
-  userId: ID
+  userId: ID!
   name: String!
   rate: String
   client: String
   themeColor: String
+}
+
+type Event {
+  id: ID! @id
+  user: User @relation(fields: [userId], references: [id])
+  userId: ID!
+  project: Project @relation(fields: [projectId], references: [id])
+  projectId: ID
+  description: String!
+  hours: Float!
+  date: String!
 }
