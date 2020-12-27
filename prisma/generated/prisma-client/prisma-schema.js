@@ -248,8 +248,9 @@ type Project {
   userId: ID!
   name: String!
   rate: String
-  client: String
+  currency: String!
   themeColor: String
+  client: String
 }
 
 type ProjectConnection {
@@ -264,8 +265,9 @@ input ProjectCreateInput {
   userId: ID!
   name: String!
   rate: String
-  client: String
+  currency: String!
   themeColor: String
+  client: String
 }
 
 input ProjectCreateOneInput {
@@ -287,10 +289,12 @@ enum ProjectOrderByInput {
   name_DESC
   rate_ASC
   rate_DESC
-  client_ASC
-  client_DESC
+  currency_ASC
+  currency_DESC
   themeColor_ASC
   themeColor_DESC
+  client_ASC
+  client_DESC
 }
 
 type ProjectPreviousValues {
@@ -298,8 +302,9 @@ type ProjectPreviousValues {
   userId: ID!
   name: String!
   rate: String
-  client: String
+  currency: String!
   themeColor: String
+  client: String
 }
 
 type ProjectSubscriptionPayload {
@@ -325,8 +330,9 @@ input ProjectUpdateDataInput {
   userId: ID
   name: String
   rate: String
-  client: String
+  currency: String
   themeColor: String
+  client: String
 }
 
 input ProjectUpdateInput {
@@ -334,16 +340,18 @@ input ProjectUpdateInput {
   userId: ID
   name: String
   rate: String
-  client: String
+  currency: String
   themeColor: String
+  client: String
 }
 
 input ProjectUpdateManyMutationInput {
   userId: ID
   name: String
   rate: String
-  client: String
+  currency: String
   themeColor: String
+  client: String
 }
 
 input ProjectUpdateOneInput {
@@ -418,20 +426,20 @@ input ProjectWhereInput {
   rate_not_starts_with: String
   rate_ends_with: String
   rate_not_ends_with: String
-  client: String
-  client_not: String
-  client_in: [String!]
-  client_not_in: [String!]
-  client_lt: String
-  client_lte: String
-  client_gt: String
-  client_gte: String
-  client_contains: String
-  client_not_contains: String
-  client_starts_with: String
-  client_not_starts_with: String
-  client_ends_with: String
-  client_not_ends_with: String
+  currency: String
+  currency_not: String
+  currency_in: [String!]
+  currency_not_in: [String!]
+  currency_lt: String
+  currency_lte: String
+  currency_gt: String
+  currency_gte: String
+  currency_contains: String
+  currency_not_contains: String
+  currency_starts_with: String
+  currency_not_starts_with: String
+  currency_ends_with: String
+  currency_not_ends_with: String
   themeColor: String
   themeColor_not: String
   themeColor_in: [String!]
@@ -446,6 +454,20 @@ input ProjectWhereInput {
   themeColor_not_starts_with: String
   themeColor_ends_with: String
   themeColor_not_ends_with: String
+  client: String
+  client_not: String
+  client_in: [String!]
+  client_not_in: [String!]
+  client_lt: String
+  client_lte: String
+  client_gt: String
+  client_gte: String
+  client_contains: String
+  client_not_contains: String
+  client_starts_with: String
+  client_not_starts_with: String
+  client_ends_with: String
+  client_not_ends_with: String
   AND: [ProjectWhereInput!]
   OR: [ProjectWhereInput!]
   NOT: [ProjectWhereInput!]

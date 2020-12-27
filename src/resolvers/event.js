@@ -4,6 +4,11 @@ async function create(parent, args, context, info) {
   const currentUser = await getCurrentUser(context);
   const { ...data } = await context.prisma.createEvent({
     ...args,
+    user: {
+      connect: {
+        id: currentUser.id,
+      },
+    },
     userId: currentUser.id,
   });
   return data;

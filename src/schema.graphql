@@ -2,6 +2,7 @@ type Query {
   users: [User!]!
   events: [Event!]!
   projects: [Project!]!
+  projectsWithTotalHours: [ProjectWithTotalHours!]!
 }
 
 type User {
@@ -18,6 +19,17 @@ type Project {
   currency: String!
   themeColor: String
   client: String
+}
+
+type ProjectWithTotalHours {
+  id: ID!
+  userId: String!
+  name: String!
+  rate: String
+  currency: String!
+  themeColor: String
+  client: String
+  totalHours: Int
 }
 
 type Event {

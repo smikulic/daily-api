@@ -8,5 +8,6 @@ function users(parent, args, context, info) {
 module.exports = {
   users,
   projects: project.index,
+  projectsWithTotalHours: project.indexWithTotalHours,
   events: event.index,
 };

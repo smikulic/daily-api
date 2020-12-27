@@ -10,8 +10,9 @@ type Project {
   userId: ID!
   name: String!
   rate: String
-  client: String
+  currency: String!
   themeColor: String
+  client: String
 }
 
 type Event {

@@ -202,10 +202,12 @@ export type ProjectOrderByInput =
   | "name_DESC"
   | "rate_ASC"
   | "rate_DESC"
-  | "client_ASC"
-  | "client_DESC"
+  | "currency_ASC"
+  | "currency_DESC"
   | "themeColor_ASC"
-  | "themeColor_DESC";
+  | "themeColor_DESC"
+  | "client_ASC"
+  | "client_DESC";
 
 export type UserOrderByInput =
   | "id_ASC"
@@ -413,20 +415,20 @@ export interface ProjectWhereInput {
   rate_not_starts_with?: Maybe<String>;
   rate_ends_with?: Maybe<String>;
   rate_not_ends_with?: Maybe<String>;
-  client?: Maybe<String>;
-  client_not?: Maybe<String>;
-  client_in?: Maybe<String[] | String>;
-  client_not_in?: Maybe<String[] | String>;
-  client_lt?: Maybe<String>;
-  client_lte?: Maybe<String>;
-  client_gt?: Maybe<String>;
-  client_gte?: Maybe<String>;
-  client_contains?: Maybe<String>;
-  client_not_contains?: Maybe<String>;
-  client_starts_with?: Maybe<String>;
-  client_not_starts_with?: Maybe<String>;
-  client_ends_with?: Maybe<String>;
-  client_not_ends_with?: Maybe<String>;
+  currency?: Maybe<String>;
+  currency_not?: Maybe<String>;
+  currency_in?: Maybe<String[] | String>;
+  currency_not_in?: Maybe<String[] | String>;
+  currency_lt?: Maybe<String>;
+  currency_lte?: Maybe<String>;
+  currency_gt?: Maybe<String>;
+  currency_gte?: Maybe<String>;
+  currency_contains?: Maybe<String>;
+  currency_not_contains?: Maybe<String>;
+  currency_starts_with?: Maybe<String>;
+  currency_not_starts_with?: Maybe<String>;
+  currency_ends_with?: Maybe<String>;
+  currency_not_ends_with?: Maybe<String>;
   themeColor?: Maybe<String>;
   themeColor_not?: Maybe<String>;
   themeColor_in?: Maybe<String[] | String>;
@@ -441,6 +443,20 @@ export interface ProjectWhereInput {
   themeColor_not_starts_with?: Maybe<String>;
   themeColor_ends_with?: Maybe<String>;
   themeColor_not_ends_with?: Maybe<String>;
+  client?: Maybe<String>;
+  client_not?: Maybe<String>;
+  client_in?: Maybe<String[] | String>;
+  client_not_in?: Maybe<String[] | String>;
+  client_lt?: Maybe<String>;
+  client_lte?: Maybe<String>;
+  client_gt?: Maybe<String>;
+  client_gte?: Maybe<String>;
+  client_contains?: Maybe<String>;
+  client_not_contains?: Maybe<String>;
+  client_starts_with?: Maybe<String>;
+  client_not_starts_with?: Maybe<String>;
+  client_ends_with?: Maybe<String>;
+  client_not_ends_with?: Maybe<String>;
   AND?: Maybe<ProjectWhereInput[] | ProjectWhereInput>;
   OR?: Maybe<ProjectWhereInput[] | ProjectWhereInput>;
   NOT?: Maybe<ProjectWhereInput[] | ProjectWhereInput>;
@@ -488,8 +504,9 @@ export interface ProjectCreateInput {
   userId: ID_Input;
   name: String;
   rate?: Maybe<String>;
-  client?: Maybe<String>;
+  currency: String;
   themeColor?: Maybe<String>;
+  client?: Maybe<String>;
 }
 
 export interface EventUpdateInput {
@@ -535,8 +552,9 @@ export interface ProjectUpdateDataInput {
   userId?: Maybe<ID_Input>;
   name?: Maybe<String>;
   rate?: Maybe<String>;
-  client?: Maybe<String>;
+  currency?: Maybe<String>;
   themeColor?: Maybe<String>;
+  client?: Maybe<String>;
 }
 
 export interface ProjectUpsertNestedInput {
@@ -557,16 +575,18 @@ export interface ProjectUpdateInput {
   userId?: Maybe<ID_Input>;
   name?: Maybe<String>;
   rate?: Maybe<String>;
-  client?: Maybe<String>;
+  currency?: Maybe<String>;
   themeColor?: Maybe<String>;
+  client?: Maybe<String>;
 }
 
 export interface ProjectUpdateManyMutationInput {
   userId?: Maybe<ID_Input>;
   name?: Maybe<String>;
   rate?: Maybe<String>;
-  client?: Maybe<String>;
+  currency?: Maybe<String>;
   themeColor?: Maybe<String>;
+  client?: Maybe<String>;
 }
 
 export interface UserUpdateInput {
@@ -695,8 +715,9 @@ export interface Project {
   userId: ID_Output;
   name: String;
   rate?: String;
-  client?: String;
+  currency: String;
   themeColor?: String;
+  client?: String;
 }
 
 export interface ProjectPromise extends Promise<Project>, Fragmentable {
@@ -705,8 +726,9 @@ export interface ProjectPromise extends Promise<Project>, Fragmentable {
   userId: () => Promise<ID_Output>;
   name: () => Promise<String>;
   rate: () => Promise<String>;
-  client: () => Promise<String>;
+  currency: () => Promise<String>;
   themeColor: () => Promise<String>;
+  client: () => Promise<String>;
 }
 
 export interface ProjectSubscription
@@ -717,8 +739,9 @@ export interface ProjectSubscription
   userId: () => Promise<AsyncIterator<ID_Output>>;
   name: () => Promise<AsyncIterator<String>>;
   rate: () => Promise<AsyncIterator<String>>;
-  client: () => Promise<AsyncIterator<String>>;
+  currency: () => Promise<AsyncIterator<String>>;
   themeColor: () => Promise<AsyncIterator<String>>;
+  client: () => Promise<AsyncIterator<String>>;
 }
 
 export interface ProjectNullablePromise
@@ -729,8 +752,9 @@ export interface ProjectNullablePromise
   userId: () => Promise<ID_Output>;
   name: () => Promise<String>;
   rate: () => Promise<String>;
-  client: () => Promise<String>;
+  currency: () => Promise<String>;
   themeColor: () => Promise<String>;
+  client: () => Promise<String>;
 }
 
 export interface EventConnection {
@@ -1020,8 +1044,9 @@ export interface ProjectPreviousValues {
   userId: ID_Output;
   name: String;
   rate?: String;
-  client?: String;
+  currency: String;
   themeColor?: String;
+  client?: String;
 }
 
 export interface ProjectPreviousValuesPromise
@@ -1031,8 +1056,9 @@ export interface ProjectPreviousValuesPromise
   userId: () => Promise<ID_Output>;
   name: () => Promise<String>;
   rate: () => Promise<String>;
-  client: () => Promise<String>;
+  currency: () => Promise<String>;
   themeColor: () => Promise<String>;
+  client: () => Promise<String>;
 }
 
 export interface ProjectPreviousValuesSubscription
@@ -1042,8 +1068,9 @@ export interface ProjectPreviousValuesSubscription
   userId: () => Promise<AsyncIterator<ID_Output>>;
   name: () => Promise<AsyncIterator<String>>;
   rate: () => Promise<AsyncIterator<String>>;
-  client: () => Promise<AsyncIterator<String>>;
+  currency: () => Promise<AsyncIterator<String>>;
   themeColor: () => Promise<AsyncIterator<String>>;
+  client: () => Promise<AsyncIterator<String>>;
 }
 
 export interface UserSubscriptionPayload {
