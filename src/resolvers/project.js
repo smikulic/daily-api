@@ -44,9 +44,12 @@ async function decorateProjectWithTotalHours(context, project) {
     return prev + current.hours;
   }, 0);
 
+  const totalBilled = totalHours * project.rate;
+
   return {
     ...project,
     totalHours,
+    totalBilled,
   };
 }
 

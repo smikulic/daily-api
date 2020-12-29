@@ -30,6 +30,7 @@ type ProjectWithTotalHours {
   themeColor: String
   client: String
   totalHours: Int
+  totalBilled: Int
 }
 
 type Event {
