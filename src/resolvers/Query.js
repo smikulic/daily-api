@@ -1,4 +1,4 @@
-const project = require("./project");
+const client = require("./client");
 const event = require("./event");
 
 function users(parent, args, context, info) {
@@ -7,7 +7,7 @@ function users(parent, args, context, info) {
 
 module.exports = {
   users,
-  projects: project.index,
-  projectsWithTotalHours: project.indexWithTotalHours,
+  clients: client.index,
+  clientsWithTotalHours: client.indexWithTotalHours,
   events: event.index,
 };

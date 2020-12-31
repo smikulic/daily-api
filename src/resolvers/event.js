@@ -9,6 +9,11 @@ async function create(parent, args, context, info) {
         id: currentUser.id,
       },
     },
+    client: {
+      connect: {
+        id: args.clientId,
+      },
+    },
     userId: currentUser.id,
   });
   return data;
@@ -16,12 +21,11 @@ async function create(parent, args, context, info) {
 
 async function index(parent, args, context, info) {
   const currentUser = await getCurrentUser(context);
-  const eventsByUser = await context.prisma.events({
+  return await context.prisma.events({
     where: {
       userId: currentUser.id,
     },
   });
-  return eventsByUser;
 }
 
 module.exports = {

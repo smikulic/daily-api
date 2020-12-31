@@ -2,7 +2,7 @@ const { getCurrentUser } = require("../getCurrentUser");
 
 async function create(parent, args, context, info) {
   const currentUser = await getCurrentUser(context);
-  const { ...data } = await context.prisma.createProject({
+  const { ...data } = await context.prisma.createClient({
     ...args,
     user: {
       connect: {
@@ -16,38 +16,37 @@ async function create(parent, args, context, info) {
 
 async function index(parent, args, context, info) {
   const currentUser = await getCurrentUser(context);
-  const projectsByUser = await context.prisma.projects({
+  return await context.prisma.clients({
     where: {
       userId: currentUser.id,
     },
   });
-  return projectsByUser;
 }
 
 async function indexWithTotalHours(parent, args, context, info) {
-  const projectsByUser = await index({}, {}, context);
+  const clientsByUser = await index({}, {}, context);
 
-  return projectsByUser.map((project) =>
-    decorateProjectWithTotalHours(context, project)
+  return clientsByUser.map((client) =>
+    decorateClientWithTotalHours(context, client)
   );
 }
 
-async function decorateProjectWithTotalHours(context, project) {
-  const eventsByProject = await context.prisma.events({
+async function decorateClientWithTotalHours(context, client) {
+  const eventsByClient = await context.prisma.events({
     where: {
-      projectId: project.id,
+      clientId: client.id,
     },
   });
 
   // get sum of hours prop across all events in array
-  let totalHours = eventsByProject.reduce((prev, current) => {
+  let totalHours = eventsByClient.reduce((prev, current) => {
     return prev + current.hours;
   }, 0);
 
-  const totalBilled = totalHours * project.rate;
+  const totalBilled = totalHours * client.rate;
 
   return {
-    ...project,
+    ...client,
     totalHours,
     totalBilled,
   };

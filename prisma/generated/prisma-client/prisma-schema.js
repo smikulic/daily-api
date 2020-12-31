@@ -3,11 +3,11 @@ module.exports = {
   // Please don't change this file manually but run `prisma generate` to update it.
   // For more information, please read the docs: https://www.prisma.io/docs/prisma-client/
 
-/* GraphQL */ `type AggregateEvent {
+/* GraphQL */ `type AggregateClient {
   count: Int!
 }
 
-type AggregateProject {
+type AggregateEvent {
   count: Int!
 }
 
@@ -19,230 +19,7 @@ type BatchPayload {
   count: Long!
 }
 
-type Event {
-  id: ID!
-  user: User
-  userId: ID!
-  project: Project
-  projectId: ID
-  description: String!
-  hours: Float!
-  date: String!
-}
-
-type EventConnection {
-  pageInfo: PageInfo!
-  edges: [EventEdge]!
-  aggregate: AggregateEvent!
-}
-
-input EventCreateInput {
-  id: ID
-  user: UserCreateOneInput
-  userId: ID!
-  project: ProjectCreateOneInput
-  projectId: ID
-  description: String!
-  hours: Float!
-  date: String!
-}
-
-type EventEdge {
-  node: Event!
-  cursor: String!
-}
-
-enum EventOrderByInput {
-  id_ASC
-  id_DESC
-  userId_ASC
-  userId_DESC
-  projectId_ASC
-  projectId_DESC
-  description_ASC
-  description_DESC
-  hours_ASC
-  hours_DESC
-  date_ASC
-  date_DESC
-}
-
-type EventPreviousValues {
-  id: ID!
-  userId: ID!
-  projectId: ID
-  description: String!
-  hours: Float!
-  date: String!
-}
-
-type EventSubscriptionPayload {
-  mutation: MutationType!
-  node: Event
-  updatedFields: [String!]
-  previousValues: EventPreviousValues
-}
-
-input EventSubscriptionWhereInput {
-  mutation_in: [MutationType!]
-  updatedFields_contains: String
-  updatedFields_contains_every: [String!]
-  updatedFields_contains_some: [String!]
-  node: EventWhereInput
-  AND: [EventSubscriptionWhereInput!]
-  OR: [EventSubscriptionWhereInput!]
-  NOT: [EventSubscriptionWhereInput!]
-}
-
-input EventUpdateInput {
-  user: UserUpdateOneInput
-  userId: ID
-  project: ProjectUpdateOneInput
-  projectId: ID
-  description: String
-  hours: Float
-  date: String
-}
-
-input EventUpdateManyMutationInput {
-  userId: ID
-  projectId: ID
-  description: String
-  hours: Float
-  date: String
-}
-
-input EventWhereInput {
-  id: ID
-  id_not: ID
-  id_in: [ID!]
-  id_not_in: [ID!]
-  id_lt: ID
-  id_lte: ID
-  id_gt: ID
-  id_gte: ID
-  id_contains: ID
-  id_not_contains: ID
-  id_starts_with: ID
-  id_not_starts_with: ID
-  id_ends_with: ID
-  id_not_ends_with: ID
-  user: UserWhereInput
-  userId: ID
-  userId_not: ID
-  userId_in: [ID!]
-  userId_not_in: [ID!]
-  userId_lt: ID
-  userId_lte: ID
-  userId_gt: ID
-  userId_gte: ID
-  userId_contains: ID
-  userId_not_contains: ID
-  userId_starts_with: ID
-  userId_not_starts_with: ID
-  userId_ends_with: ID
-  userId_not_ends_with: ID
-  project: ProjectWhereInput
-  projectId: ID
-  projectId_not: ID
-  projectId_in: [ID!]
-  projectId_not_in: [ID!]
-  projectId_lt: ID
-  projectId_lte: ID
-  projectId_gt: ID
-  projectId_gte: ID
-  projectId_contains: ID
-  projectId_not_contains: ID
-  projectId_starts_with: ID
-  projectId_not_starts_with: ID
-  projectId_ends_with: ID
-  projectId_not_ends_with: ID
-  description: String
-  description_not: String
-  description_in: [String!]
-  description_not_in: [String!]
-  description_lt: String
-  description_lte: String
-  description_gt: String
-  description_gte: String
-  description_contains: String
-  description_not_contains: String
-  description_starts_with: String
-  description_not_starts_with: String
-  description_ends_with: String
-  description_not_ends_with: String
-  hours: Float
-  hours_not: Float
-  hours_in: [Float!]
-  hours_not_in: [Float!]
-  hours_lt: Float
-  hours_lte: Float
-  hours_gt: Float
-  hours_gte: Float
-  date: String
-  date_not: String
-  date_in: [String!]
-  date_not_in: [String!]
-  date_lt: String
-  date_lte: String
-  date_gt: String
-  date_gte: String
-  date_contains: String
-  date_not_contains: String
-  date_starts_with: String
-  date_not_starts_with: String
-  date_ends_with: String
-  date_not_ends_with: String
-  AND: [EventWhereInput!]
-  OR: [EventWhereInput!]
-  NOT: [EventWhereInput!]
-}
-
-input EventWhereUniqueInput {
-  id: ID
-}
-
-scalar Long
-
-type Mutation {
-  createEvent(data: EventCreateInput!): Event!
-  updateEvent(data: EventUpdateInput!, where: EventWhereUniqueInput!): Event
-  updateManyEvents(data: EventUpdateManyMutationInput!, where: EventWhereInput): BatchPayload!
-  upsertEvent(where: EventWhereUniqueInput!, create: EventCreateInput!, update: EventUpdateInput!): Event!
-  deleteEvent(where: EventWhereUniqueInput!): Event
-  deleteManyEvents(where: EventWhereInput): BatchPayload!
-  createProject(data: ProjectCreateInput!): Project!
-  updateProject(data: ProjectUpdateInput!, where: ProjectWhereUniqueInput!): Project
-  updateManyProjects(data: ProjectUpdateManyMutationInput!, where: ProjectWhereInput): BatchPayload!
-  upsertProject(where: ProjectWhereUniqueInput!, create: ProjectCreateInput!, update: ProjectUpdateInput!): Project!
-  deleteProject(where: ProjectWhereUniqueInput!): Project
-  deleteManyProjects(where: ProjectWhereInput): BatchPayload!
-  createUser(data: UserCreateInput!): User!
-  updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
-  updateManyUsers(data: UserUpdateManyMutationInput!, where: UserWhereInput): BatchPayload!
-  upsertUser(where: UserWhereUniqueInput!, create: UserCreateInput!, update: UserUpdateInput!): User!
-  deleteUser(where: UserWhereUniqueInput!): User
-  deleteManyUsers(where: UserWhereInput): BatchPayload!
-}
-
-enum MutationType {
-  CREATED
-  UPDATED
-  DELETED
-}
-
-interface Node {
-  id: ID!
-}
-
-type PageInfo {
-  hasNextPage: Boolean!
-  hasPreviousPage: Boolean!
-  startCursor: String
-  endCursor: String
-}
-
-type Project {
+type Client {
   id: ID!
   user: User
   userId: ID!
@@ -250,16 +27,15 @@ type Project {
   rate: String
   currency: String!
   themeColor: String
-  client: String
 }
 
-type ProjectConnection {
+type ClientConnection {
   pageInfo: PageInfo!
-  edges: [ProjectEdge]!
-  aggregate: AggregateProject!
+  edges: [ClientEdge]!
+  aggregate: AggregateClient!
 }
 
-input ProjectCreateInput {
+input ClientCreateInput {
   id: ID
   user: UserCreateOneInput
   userId: ID!
@@ -267,20 +43,19 @@ input ProjectCreateInput {
   rate: String
   currency: String!
   themeColor: String
-  client: String
 }
 
-input ProjectCreateOneInput {
-  create: ProjectCreateInput
-  connect: ProjectWhereUniqueInput
+input ClientCreateOneInput {
+  create: ClientCreateInput
+  connect: ClientWhereUniqueInput
 }
 
-type ProjectEdge {
-  node: Project!
+type ClientEdge {
+  node: Client!
   cursor: String!
 }
 
-enum ProjectOrderByInput {
+enum ClientOrderByInput {
   id_ASC
   id_DESC
   userId_ASC
@@ -293,82 +68,76 @@ enum ProjectOrderByInput {
   currency_DESC
   themeColor_ASC
   themeColor_DESC
-  client_ASC
-  client_DESC
 }
 
-type ProjectPreviousValues {
+type ClientPreviousValues {
   id: ID!
   userId: ID!
   name: String!
   rate: String
   currency: String!
   themeColor: String
-  client: String
 }
 
-type ProjectSubscriptionPayload {
+type ClientSubscriptionPayload {
   mutation: MutationType!
-  node: Project
+  node: Client
   updatedFields: [String!]
-  previousValues: ProjectPreviousValues
+  previousValues: ClientPreviousValues
 }
 
-input ProjectSubscriptionWhereInput {
+input ClientSubscriptionWhereInput {
   mutation_in: [MutationType!]
   updatedFields_contains: String
   updatedFields_contains_every: [String!]
   updatedFields_contains_some: [String!]
-  node: ProjectWhereInput
-  AND: [ProjectSubscriptionWhereInput!]
-  OR: [ProjectSubscriptionWhereInput!]
-  NOT: [ProjectSubscriptionWhereInput!]
+  node: ClientWhereInput
+  AND: [ClientSubscriptionWhereInput!]
+  OR: [ClientSubscriptionWhereInput!]
+  NOT: [ClientSubscriptionWhereInput!]
 }
 
-input ProjectUpdateDataInput {
+input ClientUpdateDataInput {
   user: UserUpdateOneInput
   userId: ID
   name: String
   rate: String
   currency: String
   themeColor: String
-  client: String
 }
 
-input ProjectUpdateInput {
+input ClientUpdateInput {
   user: UserUpdateOneInput
   userId: ID
   name: String
   rate: String
   currency: String
   themeColor: String
-  client: String
 }
 
-input ProjectUpdateManyMutationInput {
+input ClientUpdateManyMutationInput {
   userId: ID
   name: String
   rate: String
   currency: String
   themeColor: String
-  client: String
 }
 
-input ProjectUpdateOneInput {
-  create: ProjectCreateInput
-  update: ProjectUpdateDataInput
-  upsert: ProjectUpsertNestedInput
+input ClientUpdateOneInput {
+  create: ClientCreateInput
+  update: ClientUpdateDataInput
+  upsert: ClientUpsertNestedInput
   delete: Boolean
   disconnect: Boolean
-  connect: ProjectWhereUniqueInput
+  connect: ClientWhereUniqueInput
 }
 
-input ProjectUpsertNestedInput {
-  update: ProjectUpdateDataInput!
-  create: ProjectCreateInput!
+input ClientUpsertNestedInput {
+  update: ClientUpdateDataInput!
+  create: ClientCreateInput!
 }
 
-input ProjectWhereInput {
+input ClientWhereInput {
   id: ID
   id_not: ID
   id_in: [ID!]
@@ -454,36 +223,245 @@ input ProjectWhereInput {
   themeColor_not_starts_with: String
   themeColor_ends_with: String
   themeColor_not_ends_with: String
-  client: String
-  client_not: String
-  client_in: [String!]
-  client_not_in: [String!]
-  client_lt: String
-  client_lte: String
-  client_gt: String
-  client_gte: String
-  client_contains: String
-  client_not_contains: String
-  client_starts_with: String
-  client_not_starts_with: String
-  client_ends_with: String
-  client_not_ends_with: String
-  AND: [ProjectWhereInput!]
-  OR: [ProjectWhereInput!]
-  NOT: [ProjectWhereInput!]
+  AND: [ClientWhereInput!]
+  OR: [ClientWhereInput!]
+  NOT: [ClientWhereInput!]
 }
 
-input ProjectWhereUniqueInput {
+input ClientWhereUniqueInput {
   id: ID
 }
 
+type Event {
+  id: ID!
+  user: User
+  userId: ID!
+  client: Client
+  clientId: ID!
+  description: String!
+  hours: Float!
+  date: String!
+}
+
+type EventConnection {
+  pageInfo: PageInfo!
+  edges: [EventEdge]!
+  aggregate: AggregateEvent!
+}
+
+input EventCreateInput {
+  id: ID
+  user: UserCreateOneInput
+  userId: ID!
+  client: ClientCreateOneInput
+  clientId: ID!
+  description: String!
+  hours: Float!
+  date: String!
+}
+
+type EventEdge {
+  node: Event!
+  cursor: String!
+}
+
+enum EventOrderByInput {
+  id_ASC
+  id_DESC
+  userId_ASC
+  userId_DESC
+  clientId_ASC
+  clientId_DESC
+  description_ASC
+  description_DESC
+  hours_ASC
+  hours_DESC
+  date_ASC
+  date_DESC
+}
+
+type EventPreviousValues {
+  id: ID!
+  userId: ID!
+  clientId: ID!
+  description: String!
+  hours: Float!
+  date: String!
+}
+
+type EventSubscriptionPayload {
+  mutation: MutationType!
+  node: Event
+  updatedFields: [String!]
+  previousValues: EventPreviousValues
+}
+
+input EventSubscriptionWhereInput {
+  mutation_in: [MutationType!]
+  updatedFields_contains: String
+  updatedFields_contains_every: [String!]
+  updatedFields_contains_some: [String!]
+  node: EventWhereInput
+  AND: [EventSubscriptionWhereInput!]
+  OR: [EventSubscriptionWhereInput!]
+  NOT: [EventSubscriptionWhereInput!]
+}
+
+input EventUpdateInput {
+  user: UserUpdateOneInput
+  userId: ID
+  client: ClientUpdateOneInput
+  clientId: ID
+  description: String
+  hours: Float
+  date: String
+}
+
+input EventUpdateManyMutationInput {
+  userId: ID
+  clientId: ID
+  description: String
+  hours: Float
+  date: String
+}
+
+input EventWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  user: UserWhereInput
+  userId: ID
+  userId_not: ID
+  userId_in: [ID!]
+  userId_not_in: [ID!]
+  userId_lt: ID
+  userId_lte: ID
+  userId_gt: ID
+  userId_gte: ID
+  userId_contains: ID
+  userId_not_contains: ID
+  userId_starts_with: ID
+  userId_not_starts_with: ID
+  userId_ends_with: ID
+  userId_not_ends_with: ID
+  client: ClientWhereInput
+  clientId: ID
+  clientId_not: ID
+  clientId_in: [ID!]
+  clientId_not_in: [ID!]
+  clientId_lt: ID
+  clientId_lte: ID
+  clientId_gt: ID
+  clientId_gte: ID
+  clientId_contains: ID
+  clientId_not_contains: ID
+  clientId_starts_with: ID
+  clientId_not_starts_with: ID
+  clientId_ends_with: ID
+  clientId_not_ends_with: ID
+  description: String
+  description_not: String
+  description_in: [String!]
+  description_not_in: [String!]
+  description_lt: String
+  description_lte: String
+  description_gt: String
+  description_gte: String
+  description_contains: String
+  description_not_contains: String
+  description_starts_with: String
+  description_not_starts_with: String
+  description_ends_with: String
+  description_not_ends_with: String
+  hours: Float
+  hours_not: Float
+  hours_in: [Float!]
+  hours_not_in: [Float!]
+  hours_lt: Float
+  hours_lte: Float
+  hours_gt: Float
+  hours_gte: Float
+  date: String
+  date_not: String
+  date_in: [String!]
+  date_not_in: [String!]
+  date_lt: String
+  date_lte: String
+  date_gt: String
+  date_gte: String
+  date_contains: String
+  date_not_contains: String
+  date_starts_with: String
+  date_not_starts_with: String
+  date_ends_with: String
+  date_not_ends_with: String
+  AND: [EventWhereInput!]
+  OR: [EventWhereInput!]
+  NOT: [EventWhereInput!]
+}
+
+input EventWhereUniqueInput {
+  id: ID
+}
+
+scalar Long
+
+type Mutation {
+  createClient(data: ClientCreateInput!): Client!
+  updateClient(data: ClientUpdateInput!, where: ClientWhereUniqueInput!): Client
+  updateManyClients(data: ClientUpdateManyMutationInput!, where: ClientWhereInput): BatchPayload!
+  upsertClient(where: ClientWhereUniqueInput!, create: ClientCreateInput!, update: ClientUpdateInput!): Client!
+  deleteClient(where: ClientWhereUniqueInput!): Client
+  deleteManyClients(where: ClientWhereInput): BatchPayload!
+  createEvent(data: EventCreateInput!): Event!
+  updateEvent(data: EventUpdateInput!, where: EventWhereUniqueInput!): Event
+  updateManyEvents(data: EventUpdateManyMutationInput!, where: EventWhereInput): BatchPayload!
+  upsertEvent(where: EventWhereUniqueInput!, create: EventCreateInput!, update: EventUpdateInput!): Event!
+  deleteEvent(where: EventWhereUniqueInput!): Event
+  deleteManyEvents(where: EventWhereInput): BatchPayload!
+  createUser(data: UserCreateInput!): User!
+  updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
+  updateManyUsers(data: UserUpdateManyMutationInput!, where: UserWhereInput): BatchPayload!
+  upsertUser(where: UserWhereUniqueInput!, create: UserCreateInput!, update: UserUpdateInput!): User!
+  deleteUser(where: UserWhereUniqueInput!): User
+  deleteManyUsers(where: UserWhereInput): BatchPayload!
+}
+
+enum MutationType {
+  CREATED
+  UPDATED
+  DELETED
+}
+
+interface Node {
+  id: ID!
+}
+
+type PageInfo {
+  hasNextPage: Boolean!
+  hasPreviousPage: Boolean!
+  startCursor: String
+  endCursor: String
+}
+
 type Query {
+  client(where: ClientWhereUniqueInput!): Client
+  clients(where: ClientWhereInput, orderBy: ClientOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Client]!
+  clientsConnection(where: ClientWhereInput, orderBy: ClientOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ClientConnection!
   event(where: EventWhereUniqueInput!): Event
   events(where: EventWhereInput, orderBy: EventOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Event]!
   eventsConnection(where: EventWhereInput, orderBy: EventOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): EventConnection!
-  project(where: ProjectWhereUniqueInput!): Project
-  projects(where: ProjectWhereInput, orderBy: ProjectOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Project]!
-  projectsConnection(where: ProjectWhereInput, orderBy: ProjectOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ProjectConnection!
   user(where: UserWhereUniqueInput!): User
   users(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User]!
   usersConnection(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): UserConnection!
@@ -491,8 +469,8 @@ type Query {
 }
 
 type Subscription {
+  client(where: ClientSubscriptionWhereInput): ClientSubscriptionPayload
   event(where: EventSubscriptionWhereInput): EventSubscriptionPayload
-  project(where: ProjectSubscriptionWhereInput): ProjectSubscriptionPayload
   user(where: UserSubscriptionWhereInput): UserSubscriptionPayload
 }
 

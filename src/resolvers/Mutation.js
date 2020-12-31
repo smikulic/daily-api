@@ -1,6 +1,6 @@
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-const project = require("./project");
+const client = require("./client");
 const event = require("./event");
 const APP_SECRET = "daily-api"; // TODO: replace
 
@@ -53,6 +53,6 @@ async function login(parent, args, context, info) {
 module.exports = {
   signup,
   login,
-  projectCreate: project.create,
+  clientCreate: client.create,
   eventCreate: event.create,
 };
