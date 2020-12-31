@@ -14,6 +14,12 @@ async function create(parent, args, context, info) {
   return data;
 }
 
+async function show(parent, args, context, info) {
+  return await context.prisma.client({
+    id: args.id,
+  });
+}
+
 async function index(parent, args, context, info) {
   const currentUser = await getCurrentUser(context);
   return await context.prisma.clients({
@@ -54,6 +60,7 @@ async function decorateClientWithTotalHours(context, client) {
 
 module.exports = {
   create,
+  show,
   index,
   indexWithTotalHours,
 };

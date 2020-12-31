@@ -7,7 +7,9 @@ function users(parent, args, context, info) {
 
 module.exports = {
   users,
+  client: client.show,
   clients: client.index,
   clientsWithTotalHours: client.indexWithTotalHours,
   events: event.index,
+  activities: event.indexGroupedByDate,
 };

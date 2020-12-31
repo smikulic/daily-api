@@ -1,6 +1,8 @@
 type Query {
   users: [User!]!
   events: [Event!]!
+  activities: [Activity!]!
+  client(id: ID!): Client!
   clients: [Client!]!
   clientsWithTotalHours: [ClienttWithTotalHours!]!
 }
@@ -39,6 +41,21 @@ type Event {
   hours: Float!
   date: String!
 }
+type EventWithClientInfo {
+  id: ID!
+  userId: ID!
+  clientId: ID!
+  description: String!
+  hours: Float!
+  date: String!
+  client: Client!
+}
+
+type Activity {
+  key: Int!
+  date: String!
+  events: [EventWithClientInfo!]!
+}
 
 type Mutation {
   signup(email: String!, password: String!): AuthPayload
@@ -50,7 +67,7 @@ type Mutation {
     themeColor: String
   ): Client
   eventCreate(
-    clientId: ID
+    clientId: ID!
     description: String!
     hours: Float!
     date: String!
