@@ -36,8 +36,11 @@ async function indexGroupedByDate(parent, args, context, info) {
   // 1. We need to get unique dates from a list of
   // events in order to group them
   const uniqueDates = [...new Set(eventsByUser.map((event) => event.date))];
+  const sortedDates = uniqueDates
+    .slice()
+    .sort((a, b) => Date.parse(b) - Date.parse(a));
 
-  return uniqueDates.map((date, key) => {
+  return sortedDates.map((date, key) => {
     // 2. for each date we group those events that match it
     const eventsByDate = eventsByUser.filter((event) => event.date === date);
     // 3. we decorate each of those events with its client data
