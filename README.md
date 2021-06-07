@@ -1,3 +1,8 @@
+## Run locally
+1. have Docker running
+2. run 'make db-up'
+3. run 'npm start'
+
 ## Change DB
 go into prisma directory
 `prisma deploy`
