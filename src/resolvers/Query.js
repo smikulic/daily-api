@@ -2,7 +2,7 @@ const client = require("./client");
 const event = require("./event");
 
 function users(parent, args, context, info) {
-  return context.prisma.users();
+  return context.prisma.user.findMany();
 }
 
 module.exports = {
