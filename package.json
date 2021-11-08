@@ -5,7 +5,9 @@
   "author": "Sinisa Mikulic",
   "license": "MIT",
   "scripts": {
-    "start": "nodemon ./src/index.js localhost 4000"
+    "start": "nodemon ./src/index.js",
+    "dev": "nodemon ./src/index.js localhost 4000",
+    "build": "prisma generate"
   },
   "devDependencies": {
     "graphql-yoga": "^1.18.3",
