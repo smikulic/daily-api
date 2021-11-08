@@ -11,8 +11,10 @@ function getCurrentUserToken(context) {
 
 async function getCurrentUser(context) {
   const currentUserToken = getCurrentUserToken(context);
-  return await context.prisma.user({
-    id: currentUserToken.userId,
+  return await context.prisma.user.findUnique({
+    where: {
+      id: currentUserToken.userId,
+    },
   });
 }
 

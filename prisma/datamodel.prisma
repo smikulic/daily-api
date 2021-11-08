@@ -21,6 +21,6 @@ type Event {
   client: Client @relation(fields: [clientId], references: [id])
   clientId: ID!
   description: String!
-  hours: Float!
+  hours: Decimal!
   date: String!
 }

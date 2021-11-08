@@ -22,7 +22,7 @@ async function create(parent, args, context, info) {
 
 async function index(parent, args, context, info) {
   const currentUser = await getCurrentUser(context);
-  return await context.prisma.events({
+  return await context.prisma.event.findMany({
     where: {
       userId: currentUser.id,
     },

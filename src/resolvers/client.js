@@ -15,14 +15,14 @@ async function create(parent, args, context, info) {
 }
 
 async function show(parent, args, context, info) {
-  return await context.prisma.client({
+  return await context.prisma.client.findUnique({
     id: args.id,
   });
 }
 
 async function index(parent, args, context, info) {
   const currentUser = await getCurrentUser(context);
-  return await context.prisma.clients({
+  return await context.prisma.client.findMany({
     where: {
       userId: currentUser.id,
     },
@@ -38,7 +38,7 @@ async function indexWithTotalHours(parent, args, context, info) {
 }
 
 async function decorateClientWithTotalHours(context, client) {
-  const eventsByClient = await context.prisma.events({
+  const eventsByClient = await context.prisma.event.findMany({
     where: {
       clientId: client.id,
     },
@@ -46,7 +46,7 @@ async function decorateClientWithTotalHours(context, client) {
 
   // get sum of hours prop across all events in array
   let totalHours = eventsByClient.reduce((prev, current) => {
-    return prev + current.hours;
+    return prev + Number(current.hours);
   }, 0);
 
   const totalBilled = totalHours * client.rate;
