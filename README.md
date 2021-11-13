@@ -115,3 +115,30 @@ mutation {
   }
 }
 ```
+
+## Client
+
+#### Client - Create
+```
+mutation {
+  clientCreate(
+    name: "test"
+    rate: "50"
+    currency: "USD"
+  ) {
+    id
+    name
+    rate
+    currency
+    userId
+  }
+}
+```
+#### Client - Remove
+```
+mutation {
+  clientRemove(id: "ckvxnrzlw0012nwt1dc4fi5kr") {
+    id
+  }
+}
+```

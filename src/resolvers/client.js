@@ -2,16 +2,23 @@ const { getCurrentUser } = require("../getCurrentUser");
 
 async function create(parent, args, context, info) {
   const currentUser = await getCurrentUser(context);
-  const { ...data } = await context.prisma.createClient({
-    ...args,
-    user: {
-      connect: {
-        id: currentUser.id,
+  const createdClient = await context.prisma.client.create({
+    data: {
+      ...args,
+      user: {
+        connect: {
+          id: currentUser.id,
+        },
       },
     },
-    userId: currentUser.id,
   });
-  return data;
+  return createdClient;
+}
+
+async function remove(parent, args, context, info) {
+  return await context.prisma.client.delete({
+    where: { id: args.id },
+  });
 }
 
 async function show(parent, args, context, info) {
@@ -60,6 +67,7 @@ async function decorateClientWithTotalHours(context, client) {
 
 module.exports = {
   create,
+  remove,
   show,
   index,
   indexWithTotalHours,

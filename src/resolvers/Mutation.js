@@ -56,5 +56,6 @@ module.exports = {
   signup,
   login,
   clientCreate: client.create,
+  clientRemove: client.remove,
   eventCreate: event.create,
 };

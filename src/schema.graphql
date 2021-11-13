@@ -66,6 +66,7 @@ type Mutation {
     currency: String!
     themeColor: String
   ): Client
+  clientRemove(id: ID!): Client
   eventCreate(
     clientId: ID!
     description: String!
